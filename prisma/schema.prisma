@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  password     String
+  name         String?
+  role         String        @default("USER")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  transactions Transaction[]
+  categories   Category[]
+  budgets      Budget[]
+  recurring    RecurringTransaction[]
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  icon         String        @default("💰")
+  color        String        @default("#6366f1")
+  type         String
+  isDefault    Boolean       @default(false)
+  userId       String?
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  budgets      Budget[]
+  recurring    RecurringTransaction[]
+  createdAt    DateTime      @default(now())
+}
+
+model Transaction {
+  id         String          @id @default(cuid())
+  amount     Float
+  type       String
+  note       String?
+  date       DateTime        @default(now())
+  userId     String
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category        @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model Budget {
+  id         String   @id @default(cuid())
+  amount     Float
+  month      Int
+  year       Int
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, categoryId, month, year])
+}
+
+
+model RecurringTransaction {
+  id         String             @id @default(cuid())
+  amount     Float
+  type       String
+  note       String?
+  frequency  String  @default("MONTHLY")
+  nextRunAt  DateTime
+  lastRunAt  DateTime?
+  isActive   Boolean            @default(true)
+  userId     String
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category           @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
