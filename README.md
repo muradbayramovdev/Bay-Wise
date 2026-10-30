@@ -141,6 +141,7 @@ The **BayWise** name and logo are the property of Murad Bayramov.
 ## 🤖 Development Approach
 
 BayWise was conceived, designed, and directed by **Murad Bayramov**, including the product idea, feature set, UI/UX design, architecture decisions, testing, and review. The implementation was developed with AI-assisted tools under the author's direction.
+
 ---
 
 Built with ❤️ by **Murad Bayramov**
