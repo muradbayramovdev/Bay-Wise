@@ -130,10 +130,17 @@ DATABASE_URL="production-url" npx prisma db push
 DATABASE_URL="production-url" npx tsx prisma/seed.ts
 ```
 
-## 📄 License
+## 📄 License & Ownership
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Copyright © 2026 Murad Bayramov. All rights reserved.
 
+This source code is provided for viewing and portfolio purposes only. No permission is granted to copy, modify, distribute, or use it commercially without written permission from the author.
+
+The **BayWise** name and logo are the property of Murad Bayramov.
+
+## 🤖 Development Approach
+
+BayWise was conceived, designed, and directed by **Murad Bayramov**, including the product idea, feature set, UI/UX design, architecture decisions, testing, and review. The implementation was developed with AI-assisted tools under the author's direction.
 ---
 
 Built with ❤️ by **Murad Bayramov**
