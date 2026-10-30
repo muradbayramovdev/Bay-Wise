@@ -1,108 +1,139 @@
-# BayWise — Kişisel Finans Takibi
+# 💰 BayWise: Personal Finance Tracker
 
-Basit, hızlı ve mobil öncelikli kişisel finans uygulaması.
+A simple, fast, mobile-first personal finance app. Track your spending, manage your budget, and understand your financial health with AI-powered insights.
 
-## Özellikler
+🔗 **Live Demo:** [bay-wise.netlify.app](https://bay-wise.netlify.app/)
 
-- Gelir/gider takibi
-- Kategori sistemi
-- Aylık bütçe yönetimi
-- Tekrarlayan işlemler
-- 6 aylık trend analizi
-- AI destekli içgörüler (OpenAI)
-- AI finans asistanı
-- Dark/light mode
-- Admin paneli
+## ✨ Features
 
-## Kurulum
+- 📊 Income and expense tracking
+- 🏷️ Category system
+- 🎯 Monthly budget management
+- 🔁 Recurring transactions
+- 📈 6-month trend analysis
+- 🤖 AI-powered insights (OpenAI)
+- 💬 AI financial assistant
+- 🌗 Dark/light mode
+- 🛡️ Admin panel
 
-### Gereksinimler
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 15 (App Router) |
+| Database | MySQL + Prisma ORM |
+| Authentication | NextAuth.js v5 |
+| UI | Tailwind CSS 4 + Recharts |
+| AI | OpenAI GPT-4o-mini |
+| Hosting | Netlify |
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Node.js 20+
 - MySQL 8+
 
-### Yerel Geliştirme
+### Local Development
+
+**1. Install dependencies:**
 
 ```bash
-# Bağımlılıkları kur
 npm install
+```
 
-# .env.local dosyasını oluştur
+**2. Set up environment variables:**
+
+```bash
 cp .env .env.local
-# .env.local içindeki değerleri düzenle
+```
 
-# Veritabanı tablolarını oluştur
+Edit the values in `.env.local` with your own credentials.
+
+**3. Create the database tables:**
+
+```bash
 npx prisma db push
+```
 
-# Varsayılan kategorileri ekle
+**4. Seed the default categories:**
+
+```bash
 npx tsx prisma/seed.ts
+```
 
-# Geliştirme sunucusunu başlat
+**5. Start the development server:**
+
+```bash
 npm run dev
 ```
 
-### Admin Hesabı Oluşturma
+The app will be available at `http://localhost:3000`.
 
-Kayıt olduktan sonra:
+### Creating an Admin Account
+
+First, register through the app. Then change the email address inside `scripts/make-admin.ts` to your own and run:
 
 ```bash
 npx tsx scripts/make-admin.ts
-# scripts/make-admin.ts içindeki email'i kendi email'inle değiştir
 ```
 
-## Netlify Deploy
+## 🔐 Environment Variables
 
-### 1. Veritabanı
+| Variable | Description | Required |
+|----------|-------------|:--------:|
+| `DATABASE_URL` | MySQL connection URL | ✅ |
+| `NEXTAUTH_SECRET` | JWT signing key | ✅ |
+| `AUTH_SECRET` | NextAuth v5 secret | ✅ |
+| `NEXTAUTH_URL` | Full URL of the application | ✅ |
+| `OPENAI_API_KEY` | OpenAI API key | For AI features |
 
-Ücretsiz MySQL için: [PlanetScale](https://planetscale.com) veya [Railway](https://railway.app)
+> 💡 To generate a strong secret: `openssl rand -base64 32`
 
-### 2. Netlify Environment Variables
+## ☁️ Deploying to Netlify
 
-Netlify dashboard → Site settings → Environment variables:
+### 1. Database
 
-```
+Set up a cloud-hosted MySQL database. Options: [Railway](https://railway.app), [Aiven](https://aiven.io), [TiDB Cloud](https://www.pingcap.com/tidb-cloud/).
+
+### 2. Environment Variables
+
+In the Netlify dashboard, go to **Site settings → Environment variables** and add:
+
+```env
 DATABASE_URL=mysql://user:pass@host:3306/baywise
-NEXTAUTH_SECRET=güçlü-rastgele-bir-string
-NEXTAUTH_URL=https://senin-site-adresi.netlify.app
-AUTH_SECRET=güçlü-rastgele-bir-string
+NEXTAUTH_SECRET=your-strong-random-string
+NEXTAUTH_URL=https://your-site-address.netlify.app
+AUTH_SECRET=your-strong-random-string
 OPENAI_API_KEY=sk-...
 ```
 
 ### 3. Deploy
 
+**Using the Netlify CLI:**
+
 ```bash
-# Netlify CLI ile
 npm install -g netlify-cli
 netlify login
 netlify init
 netlify deploy --prod
 ```
 
-Veya GitHub'a push et, Netlify'da repo'yu bağla.
+**Or via GitHub:** Push the repo to GitHub and connect it in Netlify. Every push triggers an automatic deploy.
 
-### 4. Veritabanı Tablolarını Oluştur
+### 4. Create the Production Database Tables
 
-Deploy sonrası Netlify Functions üzerinden veya local'den:
+After deploying, run this from your local machine against the production database:
 
 ```bash
 DATABASE_URL="production-url" npx prisma db push
 DATABASE_URL="production-url" npx tsx prisma/seed.ts
 ```
 
-## Ortam Değişkenleri
+## 📄 License
 
-| Değişken | Açıklama | Zorunlu |
-|----------|----------|---------|
-| `DATABASE_URL` | MySQL bağlantı URL'i | ✓ |
-| `NEXTAUTH_SECRET` | JWT imzalama anahtarı | ✓ |
-| `AUTH_SECRET` | NextAuth v5 secret | ✓ |
-| `NEXTAUTH_URL` | Uygulamanın tam URL'i | ✓ |
-| `OPENAI_API_KEY` | OpenAI API anahtarı | AI için |
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Tech Stack
+---
 
-- **Framework**: Next.js 15 (App Router)
-- **Database**: MySQL + Prisma ORM
-- **Auth**: NextAuth.js v5
-- **UI**: Tailwind CSS 4 + Recharts
-- **AI**: OpenAI GPT-4o-mini
+Built with ❤️ by **Murad Bayramov**
