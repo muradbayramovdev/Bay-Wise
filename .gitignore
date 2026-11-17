@@ -1,11 +1,63 @@
+# ---- Secrets / environment files (keep only .env.example) ----
 .env
-.env.local
-.env*.local
+.env.*
+**/.env
+**/.env.*
+!.env.example
+
+# ---- Dependencies ----
 node_modules/
+
+# ---- Next.js / build output ----
 .next/
 out/
 dist/
-*.log
-.DS_Store
-*.db
+build/
 *.tsbuildinfo
+
+# ---- Databases, dumps & backups (never commit) ----
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.dump
+*.bak
+backups/
+
+# ---- User content / uploads ----
+uploads/
+public/uploads/
+public/user-content/
+
+# ---- Keys & credentials ----
+*.pem
+*.key
+*.p12
+*.pfx
+service-account*.json
+*service_account*.json
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- Coverage / test artifacts ----
+coverage/
+*.lcov
+.nyc_output/
+
+# ---- IDE / editor ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS files ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ---- Platform / deploy artifacts ----
+.vercel/
+.netlify/
